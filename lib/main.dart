@@ -55,11 +55,9 @@ class RtspPlayerScreenState extends State<RtspPlayerScreen> {
       String outputUrl =
           'http://${server.address.host}:${server.port}/stream.m3u8';
 
-      print(outputUrl);
       final String ffmpegCommand =
           '-i ${widget.url} -preset ultrafast -tune zerolatency -hls_time 1 -hls_list_size 10 -f hls $outputUrl';
       FFmpegKit.execute(ffmpegCommand).then((rc) {
-        // Create controller for HLS stream
         _controller = VideoPlayerController.network(outputUrl);
         _controller?.initialize().then((_) {
           setState(() {});
