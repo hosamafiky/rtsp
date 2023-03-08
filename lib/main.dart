@@ -48,8 +48,12 @@ class RtspPlayerScreenState extends State<RtspPlayerScreen> {
     bindServer().then((server) {
       // Convert RTSP stream to HLS format
 
+      server.listen((request) {
+        print(request.response);
+      });
+
       String outputUrl =
-          'http://${server.address.host}:${server.port}/hls/stream.m3u8';
+          'http://${server.address.host}:${server.port}/stream.m3u8';
 
       print(outputUrl);
       final String ffmpegCommand =
